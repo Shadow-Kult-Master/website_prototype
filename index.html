@@ -1,344 +1,521 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Shadow Cult — тёмный минималистичный сайт для тестового деплоя на GitHub Pages." />
-    <title>Shadow Cult</title>
-    <style>
-      :root {
-        --bg: #0b0d12;
-        --bg-2: #111622;
-        --card: rgba(18, 22, 33, 0.76);
-        --card-2: rgba(255, 255, 255, 0.05);
-        --text: #eef2ff;
-        --muted: #a6b0cc;
-        --line: rgba(255, 255, 255, 0.1);
-        --accent: #8b5cf6;
-        --accent-2: #22d3ee;
-        --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Культ Shadow Demon</title>
+  <meta name="description" content="Официальный сайт сообщества Shadow Demon: лор, символы, ценности и контакты." />
+  <link rel="icon" href="https://static.wikia.nocookie.net/dota2_gamepedia/images/b/b6/Disruption_icon.png/revision/latest?cb=20120314230307" />
+  <style>
+    :root {
+      --bg: #07050d;
+      --bg-2: #120b1e;
+      --panel: rgba(19, 11, 31, 0.78);
+      --panel-2: rgba(33, 18, 49, 0.72);
+      --text: #f3ecff;
+      --muted: #c3b5dd;
+      --accent: #a855f7;
+      --accent-2: #f43f5e;
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius: 24px;
+    }
 
-      * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(circle at top, rgba(139, 92, 246, 0.22), transparent 30%),
-          radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.14), transparent 25%),
-          linear-gradient(180deg, var(--bg), var(--bg-2));
-        min-height: 100vh;
-      }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(168,85,247,0.18), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(244,63,94,0.14), transparent 22%),
+        linear-gradient(180deg, var(--bg), var(--bg-2) 55%, #05040a 100%);
+      min-height: 100vh;
+    }
 
-      .wrap {
-        width: min(1120px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 28px 0 48px;
-      }
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.05;
+      background-image:
+        linear-gradient(rgba(255,255,255,.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.8) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
 
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 14px 18px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(14px);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
-        position: sticky;
-        top: 16px;
-        z-index: 10;
-      }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
 
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-      }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(10, 7, 16, 0.55);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
 
-      .sigil {
-        width: 40px;
-        height: 40px;
-        border-radius: 14px;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(135deg, rgba(139, 92, 246, 0.92), rgba(34, 211, 238, 0.68));
-        box-shadow: 0 12px 30px rgba(139, 92, 246, 0.32);
-        font-size: 20px;
-      }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
 
-      nav a {
-        color: var(--muted);
-        text-decoration: none;
-        margin-left: 18px;
-        font-size: 0.96rem;
-      }
-      nav a:hover { color: var(--text); }
+    .sigil {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 0 0 4px rgba(168,85,247,0.08);
+    }
 
-      .hero {
-        margin-top: 28px;
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 22px;
-        align-items: stretch;
-      }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
 
-      .panel {
-        border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
-        backdrop-filter: blur(14px);
-        border-radius: 26px;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-      }
+    .nav a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-      .hero-main { padding: 42px; position: relative; }
-      .eyebrow {
-        display: inline-flex;
-        gap: 10px;
-        align-items: center;
-        padding: 8px 14px;
-        border: 1px solid rgba(139, 92, 246, 0.35);
-        border-radius: 999px;
-        color: #d8d4ff;
-        background: rgba(139, 92, 246, 0.12);
-        font-size: 0.9rem;
-      }
+    .nav a:hover { color: var(--text); }
 
-      h1 {
-        margin: 18px 0 12px;
-        font-size: clamp(2.7rem, 6vw, 5.2rem);
-        line-height: 0.95;
-        letter-spacing: -0.05em;
-      }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 22px;
+    }
 
-      .lead {
-        max-width: 62ch;
-        color: var(--muted);
-        font-size: 1.06rem;
-        line-height: 1.7;
-        margin: 0 0 26px;
-      }
+    .card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), rgba(12,8,20,0.7));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
 
-      .cta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
+    .hero-copy {
+      padding: 34px;
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        border-radius: 14px;
-        padding: 13px 18px;
-        text-decoration: none;
-        font-weight: 600;
-        border: 1px solid var(--line);
-        color: var(--text);
-        background: rgba(255, 255, 255, 0.04);
-        transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-      }
-      .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); }
-      .btn.primary {
-        background: linear-gradient(135deg, rgba(139,92,246,0.96), rgba(34,211,238,0.72));
-        border-color: transparent;
-      }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #f0d9ff;
+      background: rgba(168,85,247,0.1);
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+    }
 
-      .hero-side {
-        display: grid;
-        gap: 14px;
-      }
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.6rem, 5vw, 5.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+      text-wrap: balance;
+    }
 
-      .card {
-        padding: 22px;
-        border-bottom: 1px solid var(--line);
-      }
-      .card:last-child { border-bottom: 0; }
-      .card h3 {
-        margin: 0 0 8px;
-        font-size: 1.02rem;
-      }
-      .card p, .card li {
-        color: var(--muted);
-        line-height: 1.65;
-        margin: 0;
-      }
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 58ch;
+    }
 
-      .grid {
-        margin-top: 22px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
 
-      .feature {
-        padding: 22px;
-        min-height: 180px;
-      }
-      .feature .icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 16px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 14px;
-        background: rgba(255,255,255,0.07);
-        border: 1px solid var(--line);
-        font-size: 20px;
-      }
-      .feature h4 { margin: 0 0 10px; font-size: 1.08rem; }
-      .feature p { margin: 0; color: var(--muted); line-height: 1.65; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      background: rgba(255,255,255,0.03);
+    }
 
-      .section {
-        margin-top: 22px;
-        padding: 28px 30px;
-      }
-      .section h2 { margin: 0 0 12px; font-size: 1.5rem; }
-      .section p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(168,85,247,0.5);
+      background: rgba(168,85,247,0.1);
+    }
 
-      .contact {
-        margin-top: 22px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-      }
-      .contact-item {
-        padding: 22px;
-      }
-      .contact-label {
-        font-size: 0.86rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: #c6d0f7;
-        margin-bottom: 8px;
-      }
-      .contact-value {
-        font-size: 1.02rem;
-        word-break: break-word;
-      }
-      .contact-value a { color: var(--text); text-decoration: none; }
-      .contact-value a:hover { text-decoration: underline; }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(168,85,247,0.95), rgba(244,63,94,0.9));
+      border-color: transparent;
+      box-shadow: 0 12px 30px rgba(168,85,247,0.2);
+    }
 
-      footer {
-        padding: 26px 4px 0;
-        color: #8790ad;
-        text-align: center;
-        font-size: 0.95rem;
-      }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
 
-      @media (max-width: 920px) {
-        .hero, .grid, .contact { grid-template-columns: 1fr; }
-        .topbar { position: static; }
-        nav { display: none; }
-        .hero-main { padding: 28px 22px; }
-      }
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-      @media (max-width: 520px) {
-        .wrap { width: min(100% - 20px, 1120px); padding-top: 10px; }
-        h1 { font-size: 2.4rem; }
-        .hero-main, .section, .contact-item, .feature { padding: 20px; }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <header class="topbar panel">
-        <div class="brand">
-          <div class="sigil">✦</div>
-          <div>
-            <div>Shadow Cult</div>
-            <div style="color: var(--muted); font-size: 0.86rem; font-weight: 500;">test site for GitHub Pages</div>
+    .stat strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    .portrait {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.9) contrast(1.08);
+    }
+
+    .portrait .caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(7, 5, 13, 0.62);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+    }
+
+    .caption h2, .section h2 {
+      margin: 0 0 8px;
+      font-size: 1.45rem;
+    }
+
+    .caption p, .section p, .section li {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .section {
+      padding: 26px;
+    }
+
+    .about { grid-column: span 7; }
+    .beliefs { grid-column: span 5; }
+    .gallery { grid-column: span 8; }
+    .contact { grid-column: span 4; }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill-list li {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #eadfff;
+      font-size: 0.95rem;
+    }
+
+    .feature-list {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .feature-list li { margin-bottom: 10px; }
+
+    .gallery-row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .image-tile {
+      position: relative;
+      min-height: 200px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .image-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-tile .overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 14px 16px;
+      background: linear-gradient(180deg, transparent, rgba(7,5,13,0.95));
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .contact-box {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .contact-item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-item .label {
+      display: block;
+      color: #cfaef4;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .contact-item a {
+      color: var(--text);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding: 18px 4px 0;
+      color: #b7a8cf;
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .grid, .gallery-row { grid-template-columns: 1fr; }
+      .about, .beliefs, .gallery, .contact { grid-column: auto; }
+      .hero-copy, .portrait { min-height: auto; }
+      .portrait img { height: 420px; }
+      h1 { max-width: none; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding-inline: 14px; }
+      .topbar { border-radius: 22px; padding: 14px; }
+      .hero-copy, .section { padding: 20px; }
+      .stats { grid-template-columns: 1fr; }
+      .nav { gap: 10px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <img class="sigil" src="https://static.wikia.nocookie.net/dota2_gamepedia/images/b/b6/Disruption_icon.png/revision/latest?cb=20120314230307" alt="Символ Shadow Demon" />
+        <span>Shadow Demon Cult</span>
+      </div>
+      <nav class="nav">
+        <a href="#about">О культе</a>
+        <a href="#beliefs">Учение</a>
+        <a href="#gallery">Образ</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card hero-copy">
+        <div>
+          <div class="eyebrow">Поклонение тьме, тени и пустоте</div>
+          <h1>Shadow Demon</h1>
+          <p class="lead">
+            Добро пожаловать в наш уголок тьмы — место, где тень становится силой,
+            а молчание превращается в знак верности. Этот сайт посвящён лору, символам,
+            эстетике и внутреннему кодексу нашего сообщества.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#about">Войти в лор</a>
+            <a class="btn" href="#contact">Связаться с нами</a>
           </div>
         </div>
-        <nav aria-label="Навигация">
-          <a href="#about">О нас</a>
-          <a href="#principles">Принципы</a>
-          <a href="#contact">Контакты</a>
-        </nav>
-      </header>
 
-      <main>
-        <section class="hero">
-          <article class="panel hero-main">
-            <div class="eyebrow">● Тёмный минимализм · живой тест деплоя</div>
-            <h1>Сайт культа,<br />который выглядит серьёзно.</h1>
-            <p class="lead">
-              Это аккуратная одностраничная заготовка для проверки GitHub Pages: без лишнего шума,
-              с атмосферой, адаптивной сеткой и блоком контактов. Подходит как тестовый сайт,
-              так и как базовая витрина для редактирования дальше.
-            </p>
-            <div class="cta-row">
-              <a class="btn primary" href="#contact">Связаться</a>
-              <a class="btn" href="#principles">Посмотреть принципы</a>
-            </div>
-          </article>
+        <div class="stats">
+          <div class="stat">
+            <strong>3</strong>
+            <span>ключевых принципа: тень, верность, дисциплина</span>
+          </div>
+          <div class="stat">
+            <strong>1</strong>
+            <span>лидер, чьё имя ведёт нас сквозь мрак</span>
+          </div>
+          <div class="stat">
+            <strong>∞</strong>
+            <span>уровень символизма, легенд и визуального стиля</span>
+          </div>
+        </div>
+      </div>
 
-          <aside class="panel hero-side">
-            <div class="card">
-              <h3>Статус</h3>
-              <p>Готов к публикации как статический сайт: один файл, никаких зависимостей, простой деплой.</p>
-            </div>
-            <div class="card">
-              <h3>Что внутри</h3>
-              <p>Hero-секция, три информационных блока, контакты и отзывчивая верстка для телефона и десктопа.</p>
-            </div>
-            <div class="card">
-              <h3>Подсказка</h3>
-              <p>Переименуй репозиторий, замени текст или добавь новые секции — структура уже удобна для расширения.</p>
-            </div>
-          </aside>
-        </section>
-
-        <section class="grid" id="about">
-          <article class="panel feature">
-            <div class="icon">◌</div>
-            <h4>Тихая эстетика</h4>
-            <p>Контрастный фон, стеклянные карточки и фиолетово-циановый акцент делают страницу визуально цельной.</p>
-          </article>
-          <article class="panel feature" id="principles">
-            <div class="icon">⟡</div>
-            <h4>Простота деплоя</h4>
-            <p>Подходит для GitHub Pages без сборщика: достаточно файла <code>index.html</code> в корне репозитория.</p>
-          </article>
-          <article class="panel feature">
-            <div class="icon">☾</div>
-            <h4>Лёгкая доработка</h4>
-            <p>Можно быстро сменить название, добавить разделы, изображения, формы или подключить свой домен позже.</p>
-          </article>
-        </section>
-
-        <section class="panel section">
-          <h2>Коротко о принципах</h2>
+      <div class="card portrait">
+        <img src="https://liquipedia.net/commons/images/thumb/4/44/Shadow_Demon_Lore.png/600px-Shadow_Demon_Lore.png" alt="Портрет лидера Shadow Demon" />
+        <div class="caption">
+          <h2>Лидер культа</h2>
           <p>
-            Эта страница сделана как тестовая витрина: она проверяет, что GitHub Pages корректно
-            отдаёт статические файлы, а также показывает, что сайт нормально выглядит на разных экранах.
-            Если потом захочешь, сюда легко добавить галерею, лор, правила или отдельную страницу с новостями.
+            Образ, вокруг которого собираются последователи. Его тень — наш ориентир,
+            его слово — наш порядок.
           </p>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        <section class="contact" id="contact">
-          <article class="panel contact-item">
-            <div class="contact-label">Email</div>
-            <div class="contact-value"><a href="mailto:shadow.master.95073@proton.me">shadow.master.95073@proton.me</a></div>
-          </article>
-          <article class="panel contact-item">
-            <div class="contact-label">Discord</div>
-            <div class="contact-value">shadow_kult_master</div>
-          </article>
-        </section>
-      </main>
+    <div class="grid">
+      <section id="about" class="card section about">
+        <h2>О культе</h2>
+        <p>
+          Наше сообщество — это фанатский орден, вдохновлённый образом Shadow Demon.
+          Мы ценим атмосферу загадочности, внутреннюю силу, визуальную эстетику и общий лор.
+        </p>
+        <p>
+          Здесь собираются те, кому близки темные оттенки, мистические символы и идея
+          скрытой силы, проявляющейся только в нужный момент.
+        </p>
+        <ul class="pill-list">
+          <li>Тьма</li>
+          <li>Тень</li>
+          <li>Верность</li>
+          <li>Лор</li>
+          <li>Ритуальная эстетика</li>
+        </ul>
+      </section>
 
-      <footer>
-        Made for a GitHub Pages test deployment.
-      </footer>
+      <section id="beliefs" class="card section beliefs">
+        <h2>Учение</h2>
+        <ul class="feature-list">
+          <li>Тень — не слабость, а форма силы.</li>
+          <li>Молчание — это дисциплина, а не пустота.</li>
+          <li>Верность общему знаку важнее шума и показной славы.</li>
+          <li>Красота должна быть мрачной, но цельной.</li>
+        </ul>
+        <p>
+          Мы сохраняем атмосферу таинственности, но остаёмся дружелюбным и организованным
+          сообществом для тех, кому близка эта вселенная.
+        </p>
+      </section>
+
+      <section id="gallery" class="card section gallery">
+        <h2>Символика и образ</h2>
+        <p>
+          В основе визуального стиля — тёмные фоны, фиолетовые акценты, сияние вокруг символов
+          и контрастные изображения, подчёркивающие мистический характер культа.
+        </p>
+        <div class="gallery-row">
+          <div class="image-tile">
+            <img src="https://static.wikia.nocookie.net/dota2_gamepedia/images/b/b6/Disruption_icon.png/revision/latest?cb=20120314230307" alt="Фавикон и символ культа" />
+            <div class="overlay">Символ врат и разрыва</div>
+          </div>
+          <div class="image-tile">
+            <img src="https://liquipedia.net/commons/images/thumb/4/44/Shadow_Demon_Lore.png/600px-Shadow_Demon_Lore.png" alt="Портрет лидера" />
+            <div class="overlay">Лицо, которому следуют</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="card section contact">
+        <h2>Контакты</h2>
+        <p>
+          Связь для участников, союзников и тех, кто хочет присоединиться к нашему кругу.
+        </p>
+        <div class="contact-box">
+          <div class="contact-item">
+            <span class="label">Email</span>
+            <a href="mailto:shadow.master.95073@proton.me">shadow.master.95073@proton.me</a>
+          </div>
+          <div class="contact-item">
+            <span class="label">Discord</span>
+            <a href="#">shadow_kult_master</a>
+          </div>
+        </div>
+        <p style="margin-top:16px; font-size:0.95rem;">
+          Примечание: если хочешь, здесь можно добавить форму связи, раздел новостей или страницу с правилами.
+        </p>
+      </section>
     </div>
-  </body>
+
+    <footer class="footer">
+      © 2026 Shadow Demon Cult. Тьма помнит своих.
+    </footer>
+  </div>
+</body>
 </html>
